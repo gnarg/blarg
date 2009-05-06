@@ -4,7 +4,9 @@
 <title>SLACKWORKS/BLARG/<%= @tags.join('/').upcase rescue '' %></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<% javascript_include_tag 'master' %>
+<%= javascript_include_tag 'master' %>
+<%= stylesheet_link_tag 'master' %>
+<%= stylesheet_link_tag 'sh_style' %>
 
 <%= partial 'layout/google-analytics' if RAILS_ENV == 'production' %>
 
