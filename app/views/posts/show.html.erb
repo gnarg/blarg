@@ -1,17 +1,17 @@
-<% require_css 'sh_style' %>
-<% require_js 'jquery.min', 'jquery.form', 'posts/create_comment' %>
-<% require_js 'sh_main.min', 'sh_ruby.min', 'sh_sh.min' %>
+<%# require_css 'sh_style' %>
+<%# require_js 'jquery.min', 'jquery.form', 'posts/create_comment' %>
+<%# require_js 'sh_main.min', 'sh_ruby.min', 'sh_sh.min' %>
 
-<% throw_content :head do %>
+<% content_for :head do %>
   <script type="text/javascript">
     window.onload = sh_highlightDocument;
   </script>
 <% end %>
 
-<%= partial(:post, :post => @post, :slim => false) %>
+<%= render :partial => 'post', :locals => {:post => @post, :slim => false} %>
 
-<% throw_content :foot do %>
-  <%= partial(:comments, { :comments => @post.comments }) %>
+<% content_for :foot do %>
+  <%# render :partial => 'comments', :locals => { :comments => @post.comments } %>
 <% end %>
 
 
