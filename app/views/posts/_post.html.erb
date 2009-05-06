@@ -2,8 +2,7 @@
 	<h3><%= link_to post.title, "/posts/#{post.document_id}" %></h3>
 
   <div class="summary">
-	  <%#= RedCloth.new(post.summary || '').to_html %>
-	  <%=h post.summary || '' %>
+	  <%= RedCloth.new(post.summary || '').to_html %>
   </div>
   <div class="body">
     <%#= render_body(post, slim) %>
