@@ -4,14 +4,10 @@
 <title>SLACKWORKS/BLARG/<%= @tags.join('/').upcase rescue '' %></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<% require_css 'master' %>
-<%= include_required_css %>
+<% javascript_include_tag 'master' %>
 
 <%= partial 'layout/google-analytics' if RAILS_ENV == 'production' %>
 
-<%= include_required_js %>
-
-<%= catch_content :head %>
 </head>
 <body>
   <%= link_to image_tag('redgear.png', { :style => 'float:left' }), '/' %>
@@ -45,7 +41,9 @@
 		</div>
 
 		<div class="primary">
-      <%= catch_content :for_layout %>
+		  <!-- THIS IS WHERE THE MAGIC GOES -->
+      <%= yield %>
+      <!-- THE MAGIC IS OVER -->
 		</div><!-- .primary -->
 		<hr class="hide" />
 
@@ -58,9 +56,9 @@
 
 		    <dt>Recent</dt>
 		      <ul class="dates">
-		        <% Post.find_by_tags(@tags).each do |post| %>
+		        <% Post.all.each do |post| %>
 		        <li><a href="/posts/<%= post.document_id %>">
-		          <span class="date"><%= post.created_at.strftime('%b %d %Y') %></span>
+		          <span class="date"><%#= post.created_at.strftime('%b %d %Y') %></span>
 		          <%= post.title %>
 		        </a></li>
 		        <% end %>
@@ -71,14 +69,14 @@
 		    <dt>Tags</dt>
 		    <dd>
 		      <ul class="counts">
-		        <% Post.all_tags.each do |tag| %>
+		        <%# Post.all_tags.each do |tag| %>
 		        <li>
 		          <%# if controller_name == 'posts' and request.action == 'index' and request.path != '/' %>
 		            <%# link_to '+', "#{request.uri}/#{tag}" %>
 		          <%# end %>
-		          <%= link_to tag, "/tags/#{tag}" %>
+		          <%#= link_to tag, "/tags/#{tag}" %>
 		        </li>
-		        <% end %>
+		        <%# end %>
 		      </ul>
 		    </dd>
 		  </dl>
@@ -116,8 +114,6 @@
       <div class="clear"></div>
     </div>
   </div> -->
-
-  <%= catch_content :foot %>
 
 	<hr class="hide" />
 	<div id="footer">

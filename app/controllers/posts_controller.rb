@@ -3,18 +3,19 @@ class PostsController < ApplicationController
   # before :basic_authentication, :only => [ :new, :create, :edit, :update ]
 
   def index
-    provides :xml
-    @posts = Post.find_by_tags(@tags)
-    raise NotFound if @posts.empty?
+    # provides :xml
+    # @posts = Post.find_by_tags(@tags)
+    @posts = Post.all
+    # raise NotFound if @posts.empty?
 
-    if content_type == :xml
-      @base_host = request.protocol + request.host
-      if @tags.any?
-        @base_url = @base_host + '/tags/' + @tags.join('/')
-      else
-        @base_url = @base_host + '/posts'
-      end
-    end
+    # if content_type == :xml
+    #   @base_host = request.protocol + request.host
+    #   if @tags.any?
+    #     @base_url = @base_host + '/tags/' + @tags.join('/')
+    #   else
+    #     @base_url = @base_host + '/posts'
+    #   end
+    # end
 
     render
   end
@@ -39,8 +40,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    doc = CouchObject::Document.new(params[:post])
-    @post = Post.new(doc)
+    @post = Post.new(params[:post])
     @post.document_id = params[:post][:document_id]
 
     response = @post.save

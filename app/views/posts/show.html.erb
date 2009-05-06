@@ -1,0 +1,17 @@
+<% require_css 'sh_style' %>
+<% require_js 'jquery.min', 'jquery.form', 'posts/create_comment' %>
+<% require_js 'sh_main.min', 'sh_ruby.min', 'sh_sh.min' %>
+
+<% throw_content :head do %>
+  <script type="text/javascript">
+    window.onload = sh_highlightDocument;
+  </script>
+<% end %>
+
+<%= partial(:post, :post => @post, :slim => false) %>
+
+<% throw_content :foot do %>
+  <%= partial(:comments, { :comments => @post.comments }) %>
+<% end %>
+
+

@@ -1,0 +1,23 @@
+<div class="story">
+	<h3><%= link_to post.title, "/posts/#{post.document_id}" %></h3>
+
+  <div class="summary">
+	  <%#= RedCloth.new(post.summary || '').to_html %>
+	  <%=h post.summary || '' %>
+  </div>
+  <div class="body">
+    <%#= render_body(post, slim) %>
+    <%= post.body %>
+  </div>
+  <div style="clear:both"></div>
+  
+	<div class="details">
+		Posted by <%= post.author %> | 
+		<!-- <a href="#" title="# comments"># comments</a> | -->
+		Filed Under: 
+		<% post.document && post.document['tags'].each do |tag| %>
+		  <%= link_to tag, "/tags/#{tag}" %>
+		<% end %>
+	</div>
+</div> <!-- .story -->
+<div class="clear"></div>

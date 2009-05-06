@@ -1,0 +1,14 @@
+<%= stylesheet_link_tag 'sh_style' %>
+<%= javascript_include_tag 'sh_main.min', 'sh_ruby.min' %>
+
+<% content_for :head do %>
+  <link rel="alternate" type="application/atom+xml" title="Atom" 
+  href="<%= request.path + (request.path == '/' ? 'posts' : '') + '/feed.xml' %>" />
+  
+  <script type="text/javascript">
+    window.onload = sh_highlightDocument;
+  </script>  
+<% end %>
+
+<%#= @posts.map { |post| partial('posts/post', { :post => post, :slim => true }) }.to_s %>
+<%= render(:partial => "post", :collection => @posts) %>

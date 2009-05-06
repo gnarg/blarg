@@ -1,0 +1,22 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>SLACKWORKS/BLARG/<%= @tags.join('/').upcase %></title>
+  <link rel="self" href="<%= @base_url %>/feed.xml" />
+  <link rel="alternate" href="<%= @base_url %>" />
+  <id><%= @base_url %></id>
+  <% if @posts.any? %>
+   <updated><%= @posts.first.created_at.xmlschema %></updated>
+  <% end %>
+  <author><name>Slackworks</name></author>
+
+  <% @posts.each do |post| %>
+    <entry>
+      <title><%= post.title %></title>
+      <link rel="alternate" href="<%= @base_host %>/posts/<%= post.document_id %>" />
+      <id><%= @base_host %>/posts/<%= post.document_id %></id>
+      <updated><%= post.updated_at.xmlschema %></updated>
+      <author><name><%= post.author %></name></author>
+      <summary><%= remove_markup(RedCloth.new(post.summary).to_html) %></summary>
+    </entry>
+  <% end %>
+  
+</feed>
