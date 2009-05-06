@@ -9,5 +9,4 @@
   </script>  
 <% end %>
 
-<%#= @posts.map { |post| partial('posts/post', { :post => post, :slim => true }) }.to_s %>
-<%= render(:partial => "post", :collection => @posts) %>
+<%= render(:partial => "post", :collection => @posts, :locals => {:slim => true}) %>

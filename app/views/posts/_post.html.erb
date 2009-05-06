@@ -5,8 +5,7 @@
 	  <%= RedCloth.new(post.summary || '').to_html %>
   </div>
   <div class="body">
-    <%#= render_body(post, slim) %>
-    <%= post.body %>
+    <%= render_body(post, slim) %>
   </div>
   <div style="clear:both"></div>
   
