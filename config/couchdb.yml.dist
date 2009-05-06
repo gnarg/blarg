@@ -1,0 +1,11 @@
+development: &development
+  host: localhost
+  port: 5984
+  database: blarg
+
+test:
+  <<: *development
+  database: blarg_test
+
+production:
+  <<: *development
