@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SLACKWORKS/BLARG/<%= @tags.join('/').upcase rescue '' %></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<% require_css 'master' %>
+<%= include_required_css %>
+
+<%= partial 'layout/google-analytics' if RAILS_ENV == 'production' %>
+
+<%= include_required_js %>
+
+<%= catch_content :head %>
+</head>
+<body>
+  <%= link_to image_tag('redgear.png', { :style => 'float:left' }), '/' %>
+
+
+	<div id="header">
+		<div class="inside">
+		  <!-- <div id="search">
+				<form method="get" id="sform" action="#">
+ 					<div class="searchimg"></div>
+					<input type="text" id="q" value="" name="q" size="15" />
+				</form>
+			</div> -->
+
+			<h2 style="color: #FFF7D8">
+			  <%= link_to 'SLACKWORKS / BLARG', '/' %>
+			  <% @tags and @tags.each do |tag| %>
+			    <%= link_to " / #{tag.upcase}", "/tags/#{tag}" %>
+			  <% end %>
+			</h2>
+
+		</div>
+	</div>
+
+<div id="primary" class="single-post">
+	<div class="inside">
+
+		<div class="sitesummary">
+			<!-- <p>Innovation through laziness and hubris.</p> -->
+			<p>Making today worse so tomorrow seems better.</p>
+		</div>
+
+		<div class="primary">
+      <%= catch_content :for_layout %>
+		</div><!-- .primary -->
+		<hr class="hide" />
+
+		<div class="secondary">
+		  <dl class="left-nav">
+		    <dt>About</dt>
+		    <dd>
+		      Technology, programming, the interwebs and other topics by members of the slackworks community.
+		    </dd>
+
+		    <dt>Recent</dt>
+		      <ul class="dates">
+		        <% Post.find_by_tags(@tags).each do |post| %>
+		        <li><a href="/posts/<%= post.document_id %>">
+		          <span class="date"><%= post.created_at.strftime('%b %d %Y') %></span>
+		          <%= post.title %>
+		        </a></li>
+		        <% end %>
+	        </ul>
+		    <dd>
+
+		    </dd>
+		    <dt>Tags</dt>
+		    <dd>
+		      <ul class="counts">
+		        <% Post.all_tags.each do |tag| %>
+		        <li>
+		          <%# if controller_name == 'posts' and request.action == 'index' and request.path != '/' %>
+		            <%# link_to '+', "#{request.uri}/#{tag}" %>
+		          <%# end %>
+		          <%= link_to tag, "/tags/#{tag}" %>
+		        </li>
+		        <% end %>
+		      </ul>
+		    </dd>
+		  </dl>
+		</div><!-- .secondary -->
+
+		<div class="clear"></div>
+	</div>
+</div><!-- #primary -->
+
+  <!-- <hr class="hide" />
+  <div id="ancillary">
+    <div class="inside">
+      <div class="block first">
+        <h2>Links</h2>
+
+        <ul class="dates">
+          <li><a href="#">LINK</a></li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h2>Recently</h2>
+        <ul class="dates">
+          <li><a href="#"><span class="date">DATE</span>TITLE</a></li>
+       </ul>
+      </div>
+
+      <div class="block">
+        <h2>Categories</h2>
+        <ul class="counts">
+          <li><a href="#"><span class="count">#</span>TAG</a></li>
+        </ul>
+      </div>
+
+      <div class="clear"></div>
+    </div>
+  </div> -->
+
+  <%= catch_content :foot %>
+
+	<hr class="hide" />
+	<div id="footer">
+	  <div class="inside">
+			<p class="copyright">
+			  Powered by <a href="http://merbivore.com/">Merb</a> and
+			  <a href="http://couchdb.org/">CouchDB</a></p>
+			<p class="attributes">Written by <!-- <a href="http://www.slackworks.com/"> -->slackworks<!-- </a> --></p>
+	  </div>
+  </div>
+
+</body>
+</html>
