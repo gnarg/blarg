@@ -1,4 +1,4 @@
-<%= form_for @post, :action => "/posts/#{@post.document_id}" do %>
-  <%= partial(:form) %>
+<% form_tag "/posts/#{@post.id}", :method => 'put' do %>
+  <%= render :partial => 'form' %>
   <input type="hidden" name="_method" value="put"/>
-<% end =%>
+<% end %>
