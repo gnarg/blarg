@@ -23,4 +23,15 @@ class PostsControllerTest < ActionController::TestCase
     assert_equal 'new-title', assigns(:post).title
     assert_redirected_to :action => 'show', :id => 'test-post'
   end  
+  
+  test "#new renders a form with a new post" do
+    get :new
+    assert assigns(:post).new_document?
+  end
+  
+  test "#create saves the given post data as a new post" do
+    post :create, :post => {:slug => 'test-post', :title => 'test post'}
+    assert_redirected_to :action => 'show', :id => 'test-post'
+    assert_equal 'test post', assigns(:post).title
+  end
 end

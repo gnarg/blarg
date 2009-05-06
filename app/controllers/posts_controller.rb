@@ -23,30 +23,23 @@ class PostsController < ApplicationController
 
   def show
     params.delete(:format)
-    render
   end
 
   def new
     @post = Post.new
     @post.created_at = Time.now
     @post.updated_at = Time.now
-    render
   end
 
   def edit
     @post.updated_at = Time.now
-    render
   end
 
   def create
     @post = Post.new(params[:post])
-    @post.document_id = params[:post][:document_id]
-
-    response = @post.save
-    if response['ok']
-      redirect "/posts/#{@post.document_id}"
+    if @post.save
+      redirect_to post_path(@post.slug)
     else
-      raise response.inspect
       # TODO: add error messages to flash
       render :template => 'posts/new'
     end

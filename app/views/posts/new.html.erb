@@ -1,3 +1,4 @@
-<%= form_for @post, :action => "/posts" do %>
-  <%= partial(:form) %>
-<% end =%>
+<%# form_for @post, :action => "/posts" do %>
+<% form_tag "/posts", :method => 'post' do %>
+  <%= render :partial => 'form' %>
+<% end %>
