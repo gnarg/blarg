@@ -1,0 +1,2 @@
+class Post < Sofa
+end
