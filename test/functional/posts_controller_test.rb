@@ -16,4 +16,11 @@ class PostsControllerTest < ActionController::TestCase
     get :edit, :id => 'test-post'
     assert_equal post.id, assigns(:post).id
   end
+  
+  test "#update updates the specified post on success" do
+    post = Post.create(:slug => 'test-post', :title => 'old-title')
+    put :update, :id => 'test-post', :post => {:slug => 'test-post', :title => 'new-title' }
+    assert_equal 'new-title', assigns(:post).title
+    assert_redirected_to :action => 'show', :id => 'test-post'
+  end  
 end

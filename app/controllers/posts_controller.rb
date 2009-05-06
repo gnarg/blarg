@@ -53,13 +53,12 @@ class PostsController < ApplicationController
   end
 
   def update
-    response = @post.update_attributes(params[:post])
-    if response['ok']
-      redirect "/posts/#{@post.document_id}"
+    @post.replace(params[:post])
+    if @post.save
+      redirect_to post_path(@post.slug)
     else
-      raise response.inspect
       # TODO: add error messages to flash
-      render :template => 'posts/edit', :id => @post.document_id
+      render :template => 'posts/edit', :id => @post.slug
     end
   end
 
@@ -70,12 +69,12 @@ class PostsController < ApplicationController
   end
 
   def marshal_params
-    @tags = params[:tags].split('/') rescue []
+    @tags = params[:tags].split('/') if params[:tags]
 
     if params[:post]
       params[:post][:created_at] = Time.parse(params[:post][:created_at]).xmlschema rescue Time.now
       params[:post][:updated_at] = Time.parse(params[:post][:updated_at]).xmlschema rescue Time.now    
-      params[:post][:tags] = params[:post][:tags].split(' ')
+      params[:post][:tags] = params[:post][:tags].split(' ') if params[:post][:tags]
     end
   end
 end
