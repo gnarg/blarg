@@ -1,8 +1,9 @@
 require 'test_helper'
 
 class PostsControllerTest < ActionController::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  test "#show gets the post by slug" do
+    post = Post.create(:slug => 'test-post')
+    get :show, :id => 'test-post'
+    assert_equal post.id, assigns(:post).id
   end
 end

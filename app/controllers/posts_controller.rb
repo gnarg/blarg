@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_filter :marshal_params
+  before_filter :get_post_by_slug, :only => [:show, :edit, :update]
   # before :basic_authentication, :only => [ :new, :create, :edit, :update ]
 
   def index
@@ -21,7 +22,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find_by_id(params[:id])
     params.delete(:format)
     render
   end
@@ -34,7 +34,6 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find_by_id(params[:id])
     @post.updated_at = Time.now
     render
   end
@@ -54,8 +53,6 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find_by_id(params[:id])
-
     response = @post.update_attributes(params[:post])
     if response['ok']
       redirect "/posts/#{@post.document_id}"
@@ -67,6 +64,10 @@ class PostsController < ApplicationController
   end
 
   protected
+  
+  def get_post_by_slug
+    @post = Post.get_by_slug(params[:id])
+  end
 
   def marshal_params
     @tags = params[:tags].split('/') rescue []

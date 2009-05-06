@@ -35,4 +35,10 @@ class ActiveSupport::TestCase
   # fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  
+  def clean_couch
+    COUCHDB.documents['rows'].each do |row|
+      COUCHDB.delete_doc('_id' => row['id'], '_rev' => row['value']['rev'])
+    end
+  end
 end
