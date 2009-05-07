@@ -66,7 +66,6 @@ protected
     if params[:post]
       params[:post][:created_at] = Time.parse(params[:post][:created_at]).xmlschema rescue Time.now
       params[:post][:updated_at] = Time.parse(params[:post][:updated_at]).xmlschema rescue Time.now    
-      params[:post][:tags] = params[:post][:tags].split(' ') if params[:post][:tags]
     end
   end
 end
