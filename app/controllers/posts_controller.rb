@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   def index
     # provides :xml
     # @posts = Post.find_by_tags(@tags)
-    @posts = Post.all
+    @posts = Post.all.sort {|b,a| a.created_at <=> b.created_at}
     # raise NotFound if @posts.empty?
 
     # if content_type == :xml

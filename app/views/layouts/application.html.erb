@@ -59,7 +59,7 @@
 		      <ul class="dates">
 		        <% Post.all.each do |post| %>
 		        <li><a href="/posts/<%= post.document_id %>">
-		          <span class="date"><%#= post.created_at.strftime('%b %d %Y') %></span>
+		          <span class="date"><%= post.created_at.strftime('%b %d %Y') %></span>
 		          <%= post.title %>
 		        </a></li>
 		        <% end %>

@@ -10,7 +10,7 @@
   <div style="clear:both"></div>
   
 	<div class="details">
-		Posted by <%= post.author %> | 
+		Posted by <%= post.author %> on <%= post.created_at.strftime('%b %d %Y') %> | 
 		<!-- <a href="#" title="# comments"># comments</a> | -->
 		Filed Under: 
 		<% post.document && post.document['tags'].each do |tag| %>

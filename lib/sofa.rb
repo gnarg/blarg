@@ -117,20 +117,20 @@ class Sofa < OpenStruct
     id
   end
   
-  def created_at=(time)
-    time.blank? ? super(nil) : super(time.utc.to_i)
-  end
-  
-  def updated_at=(time)
-    time.blank? ? super(nil) : super(time.utc.to_i)
-  end
-  
   def created_at
-    super.blank? ? nil : Time.zone.at(super)
+    Time.xmlschema(@table['created_at'])
+  end
+  
+  def created_at=(time)
+    @table['created_at'] = time.xmlschema
   end
   
   def updated_at
-    super.blank? ? nil : Time.zone.at(super)
+    Time.xmlschema(@table['updated_at'])
+  end
+  
+  def updated_at=(time)
+    @table['updated_at'] = time.xmlschema
   end
   
   def errors
