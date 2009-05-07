@@ -1,5 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :posts
+  
+  map.connect 'tags/*tags', :controller => 'posts', :action => 'index'
 
   map.root :controller => "posts"
 

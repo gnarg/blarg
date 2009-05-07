@@ -22,4 +22,28 @@ class PostTest < ActiveSupport::TestCase
     
     assert_equal saved_post, found_post
   end
+  
+  test ".get_by_tags returns all posts with all given tags" do
+    post_foo = Post.create(:tags => ['foo'])
+    post_bar = Post.create(:tags => ['bar'])
+    post_foo_bar = Post.create(:tags => ['foo', 'bar'])
+    
+    posts = Post.get_by_tags('foo', 'bar')
+    
+    assert posts.include?(post_foo_bar)
+    assert !posts.include?(post_foo)
+    assert !posts.include?(post_bar)
+  end
+  
+  test ".get_by_tags returns all posts if no tags are given" do
+    post_foo = Post.create(:tags => ['foo'])
+    post_bar = Post.create(:tags => ['bar'])
+    post_foo_bar = Post.create(:tags => ['foo', 'bar'])
+    
+    posts = Post.get_by_tags
+    
+    assert posts.include?(post_foo_bar)
+    assert posts.include?(post_foo)
+    assert posts.include?(post_bar)
+  end
 end

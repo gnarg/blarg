@@ -18,12 +18,16 @@ class Sofa < OpenStruct
       end  
     end
     
-    def temp_view(map, reduce=nil)
-      query = Hash === map ? map : { :map => map, :reduce => reduce }
-      query[:map] = "function(doc) { #{query[:map]} }"
-      query[:reduce] = "function (keys, values, rereduce) { #{query[:reduce]} }" if reduce
-    
-      COUCHDB.temp_view(query)['rows'].map do |row|
+    def temp_view(opts)
+      if opts.kind_of?(String)
+        hash = { :map => opts }
+        opts = hash
+      end
+      
+      opts[:map] = "function(doc) { #{opts[:map]} }"
+      opts[:reduce] = "function (keys, values, rereduce) { #{opts[:reduce]} }" if opts[:reduce]
+      
+      COUCHDB.temp_view(opts)['rows'].map do |row|
         self.new(row['value'])
       end    
     end

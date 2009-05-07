@@ -4,9 +4,8 @@ class PostsController < ApplicationController
   # before :basic_authentication, :only => [ :new, :create, :edit, :update ]
 
   def index
-    # provides :xml
-    # @posts = Post.find_by_tags(@tags)
-    @posts = Post.all.sort {|b,a| a.created_at <=> b.created_at}
+    @posts = Post.get_by_tags(*@tags)
+    
     # raise NotFound if @posts.empty?
 
     # if content_type == :xml
@@ -18,7 +17,7 @@ class PostsController < ApplicationController
     #   end
     # end
 
-    render
+    # raise @tags.inspect
   end
 
   def show
@@ -55,14 +54,14 @@ class PostsController < ApplicationController
     end
   end
 
-  protected
+protected
   
   def get_post_by_slug
     @post = Post.get_by_slug(params[:id])
   end
 
   def marshal_params
-    @tags = params[:tags].split('/') if params[:tags]
+    @tags = params[:tags]
 
     if params[:post]
       params[:post][:created_at] = Time.parse(params[:post][:created_at]).xmlschema rescue Time.now

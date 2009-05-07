@@ -5,6 +5,30 @@ class PostsControllerTest < ActionController::TestCase
     clean_couch
   end
   
+  test "#index with no tags shows all posts" do
+    post1 = Post.create(:slug => 'post1')
+    post2 = Post.create(:slug => 'post2') 
+    
+    get :index
+    
+    assert assigns(:posts).include?(post1)
+    assert assigns(:posts).include?(post2)    
+  end
+  
+  test "#index with tags shows all posts with all given tags" do
+    post_foo = Post.create(:tags => ['foo'])
+    post_bar = Post.create(:tags => ['bar'])
+    post_foo_bar = Post.create(:tags => ['foo', 'bar'])
+    
+    get :index, :tags => ['foo', 'bar']
+    
+    assert assigns(:posts).include?(post_foo_bar)
+    assert !assigns(:posts).include?(post_foo)
+    assert !assigns(:posts).include?(post_bar)    
+  end
+  
+  # test "#index shows posts ordered by create_date"
+  
   test "#show gets the post by slug" do
     post = Post.create(:slug => 'test-post')
     get :show, :id => 'test-post'

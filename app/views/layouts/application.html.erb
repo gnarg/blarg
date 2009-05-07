@@ -25,7 +25,7 @@
 
 			<h2 style="color: #FFF7D8">
 			  <%= link_to 'SLACKWORKS / BLARG', '/' %>
-			  <% @tags and @tags.each do |tag| %>
+			  <% @tags.try(:any?) && @tags.each do |tag| %>
 			    <%= link_to " / #{tag.upcase}", "/tags/#{tag}" %>
 			  <% end %>
 			</h2>
