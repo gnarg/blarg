@@ -23,6 +23,11 @@ class PostsController < ApplicationController
 
   def show
     params.delete(:format)
+    if @post
+      @comments = @post.comments
+    else
+      @comments = false
+    end
   end
 
   def new
