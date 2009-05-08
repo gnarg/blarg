@@ -62,7 +62,7 @@ class Sofa < OpenStruct
     self.document_type = self.class.name
     attributes = self.to_hash
     
-    time = Time.now.utc.to_i
+    time = Time.now.xmlschema
     attributes.update('created_at' => time) if new_document? && attributes['created_at'].blank?
     attributes.update('updated_at' => time)
     
