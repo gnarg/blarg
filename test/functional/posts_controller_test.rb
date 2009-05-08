@@ -34,4 +34,5 @@ class PostsControllerTest < ActionController::TestCase
     assert_redirected_to :action => 'show', :id => 'test-post'
     assert_equal 'test post', assigns(:post).title
   end
+  
 end
