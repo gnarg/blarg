@@ -9,7 +9,7 @@ class PostsHelperTest < ActionView::TestCase
     post = Post.create( :slug => 'test-post-helper', :body => '<p>one</p><p>two</p><p>three</p><p>four</p><p>five</p>' )
     post.save
     assert_equal(
-      "<p>one</p><p>two</p><p>three</p><p>four</p><p><a href=\"/posts/#{post.id}\">&#8230; more</a></p>", render_slim_body( post ) )
+      "<p>one</p><p>two</p><p>three</p><p>four</p><p><a href=\"/posts/#{post.slug}\">&#8230; more</a></p>", render_slim_body( post ) )
   end
 
   test "#render_redcloth transforms redcloth into html" do
@@ -20,7 +20,7 @@ class PostsHelperTest < ActionView::TestCase
     post = Post.create( :slug => 'test-post-helper', :body => '<p>one</p><p>two</p><p>three</p><p>four</p><p>five</p>' )
     post.save
     assert_equal(
-      "<p>one</p><p>two</p><p>three</p><p>four</p><p><a href=\"/posts/#{post.id}\">&#8230; more</a></p>", render_body( post, true ) )
+      "<p>one</p><p>two</p><p>three</p><p>four</p><p><a href=\"/posts/#{post.slug}\">&#8230; more</a></p>", render_body( post, true ) )
 
   end
 

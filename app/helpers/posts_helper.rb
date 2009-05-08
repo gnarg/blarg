@@ -38,7 +38,7 @@ module PostsHelper
       html += part.to_html
 
       if html.size != 0 and lines >= max_lines
-        html += "<p>#{link_to "&#8230; more", :controller => 'posts', :action => 'show', :id => post.id }</p>"
+        html += "<p>#{link_to "&#8230; more", :controller => 'posts', :action => 'show', :id => post.slug }</p>"
         break
       end
     end
