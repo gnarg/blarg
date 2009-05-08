@@ -1,11 +1,5 @@
-<%# require_css 'sh_style' %>
-<%# require_js 'jquery.min', 'jquery.form', 'posts/create_comment' %>
-<%# require_js 'sh_main.min', 'sh_ruby.min', 'sh_sh.min' %>
-
-<% content_for :head do %>
-  <script type="text/javascript">
-    window.onload = sh_highlightDocument;
-  </script>
+<% content_for :js do %>
+  <%= javascript_include_tag 'posts/create_comment' %>
 <% end %>
 
 <%= render :partial => 'post', :locals => {:post => @post, :slim => false} %>
