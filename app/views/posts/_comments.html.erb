@@ -2,7 +2,7 @@
 <div id="secondary" style="clear:both;">
   <div class="inside">
     <div class="comment-head">
-      <h2><%= comments.size %> comments</h2>
+      <h2><span id="comment-count"><%= comments.size %></span> comments</h2>
 
       <!-- <span class="details"><a href="#comment-form">Jump to comment form</a></span> -->
     </div>
@@ -28,7 +28,7 @@
     </div>
     
     <div id="comment-form">
-      <form id="comment" method="post" action="#">
+      <% form_tag( "/posts/#{@post.slug}/comments.js", :id => "comment" ) do |f| %>
       
       <h3 class="formhead">Comment</h3>
       <p>Plain text only for now please.</p>
@@ -46,9 +46,9 @@
       <div class="formactions">
         <%= submit_tag 'Post comment' %>
       </div>
-      <%= hidden_field_tag "comment[post_id]", @post.document_id %>
+      <%= hidden_field_tag "comment[post_id]", @post.id %>
       <%= hidden_field_tag 'comment[created_at]', Time.now.xmlschema %>
-      </form>
+      <% end %>
     </div>
     
   </div>
