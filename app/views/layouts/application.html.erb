@@ -57,7 +57,7 @@
 
 		    <dt>Recent</dt>
 		      <ul class="dates">
-		        <% Post.all.each do |post| %>
+		        <% @recent_posts.each do |post| %>
 		        <li><a href="/posts/<%= post.document_id %>">
 		          <span class="date"><%= post.created_at.strftime('%b %d %Y') %></span>
 		          <%= post.title %>
@@ -70,16 +70,18 @@
 		    <dt>Tags</dt>
 		    <dd>
 		      <ul class="counts">
-		        <%# Post.all_tags.each do |tag| %>
+		        <% @all_tags.each do |tag| %>
 		        <li>
-		          <%# if controller_name == 'posts' and request.action == 'index' and request.path != '/' %>
-		            <%# link_to '+', "#{request.uri}/#{tag}" %>
-		          <%# end %>
-		          <%#= link_to tag, "/tags/#{tag}" %>
+		          <% if controller_name == 'posts' && params[:action] == 'index' && request.path != '/' %>
+		            <% link_to '+', "#{request.uri}/#{tag}" %>
+		          <% end %>
+		          <%= link_to tag, "/tags/#{tag}" %>
 		        </li>
-		        <%# end %>
+		        <% end %>
 		      </ul>
 		    </dd>
+		    
+		    <%= yield :left_nav %>
 		  </dl>
 		</div><!-- .secondary -->
 
