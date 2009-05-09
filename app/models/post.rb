@@ -30,4 +30,25 @@ class Post < Sofa
     
     self.temp_view :map => map #, :keys => tags
   end
+  
+  def self.get_all_tags
+    map = <<-JS
+      function(doc) {
+        if (doc.document_type == 'Post' && doc.tags) {
+          doc.tags.forEach(function(tag) {
+            emit(tag, 1);
+          });
+        }
+      }
+    JS
+      
+    reduce = <<-JS
+      function(keys, values) {
+        return sum(values);
+      }
+    JS
+      
+    result = COUCHDB.temp_view({:map => map, :reduce => reduce}, {:group => true})['rows']
+    result.map{|r|r['key']}
+  end
 end

@@ -5,6 +5,24 @@ class PostsControllerTest < ActionController::TestCase
     clean_couch
   end
   
+  test "gets recent posts" do
+    post = Post.create(:slug => 'post1')
+    
+    get :index
+    
+    assert assigns(:recent_posts).include?(post)
+  end
+  
+  test "gets a list of all tags" do
+    post_foo = Post.create(:tags => ['foo'])
+    post_bar = Post.create(:tags => ['bar'])
+    
+    get :index
+    
+    assert assigns(:all_tags).include?('foo')
+    assert assigns(:all_tags).include?('bar')    
+  end
+  
   test "#index with no tags shows all posts" do
     post1 = Post.create(:slug => 'post1')
     post2 = Post.create(:slug => 'post2') 

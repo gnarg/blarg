@@ -46,4 +46,18 @@ class PostTest < ActiveSupport::TestCase
     assert posts.include?(post_foo)
     assert posts.include?(post_bar)
   end
+  
+  test ".get_all_tags returns unique list of all tags" do
+    post_foo = Post.create(:tags => ['foo'])
+    post_bar = Post.create(:tags => ['bar'])
+    post_foo_bar = Post.create(:tags => ['foo', 'bar'])
+    post_foo_baz = Post.create(:tags => ['foo', 'baz'])
+    
+    tags = Post.get_all_tags
+    
+    assert_equal 3, tags.size
+    assert tags.include?('foo')
+    assert tags.include?('bar')
+    assert tags.include?('baz')        
+  end
 end
