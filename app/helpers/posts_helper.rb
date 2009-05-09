@@ -5,6 +5,10 @@ module PostsHelper
     text.gsub('&#8217;', "'")
   end
 
+  def render_redcloth(txt)
+    RedCloth.new(txt||'').to_html
+  end
+
   #
   # Uses Hpricot to count the number of Textile structure tags and determine
   # where to stop and add a more link.
@@ -13,7 +17,7 @@ module PostsHelper
     html = ""
     max_lines = 10
     lines = 0
-    Hpricot( RedCloth.new(post.body||'').to_html ).search( "/*" ).each do |part|
+    Hpricot( render_redcloth( post.body ) ).search( "/*" ).each do |part|
       # XXX: make this recursively check for child tags?
       if part.elem?
         if part.name == "p" or part.name == "pre" or part.name == "code"
@@ -34,7 +38,7 @@ module PostsHelper
       html += part.to_html
 
       if html.size != 0 and lines >= max_lines
-        html += "<p>#{link_to "&#8230; more", "/posts/#{post.document_id}" }</p>"
+        html += "<p>#{link_to "&#8230; more", :controller => 'posts', :action => 'show', :id => post.slug }</p>"
         break
       end
     end
@@ -46,7 +50,7 @@ module PostsHelper
     if is_render_slim
       render_slim_body( post )
     else
-      RedCloth.new( post.body || '' ).to_html
+      render_redcloth( post.body )
     end
   end
 end

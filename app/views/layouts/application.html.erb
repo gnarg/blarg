@@ -1,14 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>SLACKWORKS/BLARG/<%= @tags.join('/').upcase rescue '' %></title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>SLACKWORKS/BLARG/<%= @tags.join('/').upcase rescue '' %></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<%= stylesheet_link_tag 'master' %>
-<%= stylesheet_link_tag 'sh_style' %>
+  <%= javascript_include_tag 'jquery-1.3.2.min', 'jquery-ui-1.7.1.custom.min', 'jquery.form' %>
+  <%= yield :js %>
 
-<%= partial 'layout/google-analytics' if RAILS_ENV == 'production' %>
+  <%= stylesheet_link_tag 'master', 'sh_style' %>
+  
+  <%= yield :css %>
 
+  <%= partial 'layout/google-analytics' if RAILS_ENV == 'production' %>
 </head>
 <body>
   <%= link_to image_tag('redgear.png', { :style => 'float:left' }), '/' %>
@@ -117,6 +120,8 @@
       <div class="clear"></div>
     </div>
   </div> -->
+
+    <%= yield :foot %>
 
 	<hr class="hide" />
 	<div id="footer">

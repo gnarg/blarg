@@ -10,7 +10,7 @@
     <div id="comments">
     <ol id="comment_list">
       <% comments.each do |comment| %>
-        <%= partial('comments/comment', { :comment => comment} ) %>
+        <%= render :partial => 'comments/comment', :locals => { :comment => comment}  %>
       <% end %>      
 
       <!-- <li id="preview2">
@@ -35,18 +35,19 @@
       
       <!-- <p>Commenting uses <a href="http://hobix.com/textile/">Textile</a>, which also allows plain HTML. <br/><strong>Use &lt;filter:code lang="ruby"&gt; and &lt;/filter:code&gt; tags to surround code blocks.</strong></p> -->
 
-      <%= text_field :name => 'comment[author]', :id => 'comment_author' %>
-      <label class="text" for="comment_author">Name (Required)</label><br /> 
-      <%= text_field :name => 'comment[url]', :id => 'comment_url' %>      
+      <%= text_field 'comment[author]', :id => 'comment_author' %>
+      <label class="text" for="comment_author">Name (Required)</label><br />
+      
+      <%= text_field 'comment[url]', :id => 'comment_url' %>      
       <label class="text" for="comment_url">Website</label><br />
       <p>
-        <%= text_area '', :name => 'comment[body]', :id => 'comment_body' %>
+        <%= text_area 'comment[body]', :id => 'comment_body' %>
       </p>
       <div class="formactions">
-        <%= submit 'Post comment' %>
+        <%= submit_tag 'Post comment' %>
       </div>
-      <%= hidden_field :name => "comment[post_id]", :value => @post.document_id %>
-      <%= hidden_field :name => 'comment[created_at]', :value => Time.now.xmlschema %>
+      <%= hidden_field "comment[post_id]", :value => @post.document_id %>
+      <%= hidden_field 'comment[created_at]', :value => Time.now.xmlschema %>
       </form>
     </div>
     
