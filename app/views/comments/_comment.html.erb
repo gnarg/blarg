@@ -1,0 +1,17 @@
+<li class="by-guest">
+  <cite>
+    <span class="author">
+      <% if comment.url and not comment.url.empty? %>
+        <%= link_to h(comment.author), h(comment.url) %>
+      <% else %>
+        <%= h comment.author %>
+      <% end %>
+    </span>
+    <span class="date"><%= comment.created_at.strftime('%b %d %Y') %></span>
+  </cite>
+  <div class="content">
+    <p><%= h comment.body %></p>
+  </div>
+
+  <div class="clear"></div>
+</li>
