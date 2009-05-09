@@ -4,18 +4,16 @@ class Sofa < OpenStruct
   class << self
     def get(id)
       raise ArgumentError.new("missing required id") if id.nil?
-      begin
-        document = COUCHDB.get(id)
-        self.new(document)
-      rescue RestClient::ResourceNotFound
-        nil
-      end
+      document = COUCHDB.get(id)
+      self.new(document)
+    rescue RestClient::ResourceNotFound
+      nil
     end
     
     def create(attributes)
-      returning(new(attributes)) do |product|
-        product.save
-      end  
+      object = self.new(attributes)
+      object.save
+      object
     end
     
     def temp_view(opts)
@@ -66,9 +64,9 @@ class Sofa < OpenStruct
     self.document_type = self.class.name
     attributes = self.to_hash
     
-    time = Time.now.utc.to_i
-    attributes.update('created_at' => time) if new_document? && attributes['created_at'].blank?
-    attributes.update('updated_at' => time)
+    time = Time.now
+    attributes.update('created_at' => time.xmlschema) if new_document? && attributes['created_at'].blank?
+    attributes.update('updated_at' => time.xmlschema)
     
     response = COUCHDB.save_doc(attributes)
     if response['ok']
