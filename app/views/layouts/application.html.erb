@@ -57,32 +57,10 @@
 		      Technology, programming, the interwebs and other topics by members of the slackworks community.
 		    </dd>
 
-		    <dt>Recent</dt>
-		      <ul class="dates">
-		        <% @recent_posts.each do |post| %>
-		        <li><a href="/posts/<%= post.document_id %>">
-		          <span class="date"><%= post.created_at.strftime('%b %d %Y') %></span>
-		          <%= post.title %>
-		        </a></li>
-		        <% end %>
-	        </ul>
-		    <dd>
+        <%= render 'layouts/recent' %>
 
-		    </dd>
-		    <dt>Tags</dt>
-		    <dd>
-		      <ul class="counts">
-		        <% @all_tags.each do |tag| %>
-		        <li>
-		          <% if controller_name == 'posts' && params[:action] == 'index' && request.path != '/' %>
-		            <% link_to '+', "#{request.uri}/#{tag}" %>
-		          <% end %>
-		          <%= link_to tag, "/tags/#{tag}" %>
-		        </li>
-		        <% end %>
-		      </ul>
-		    </dd>
-		    
+        <%= render 'layouts/tags' %>
+
 		    <%= yield :left_nav %>
 		  </dl>
 		</div><!-- .secondary -->

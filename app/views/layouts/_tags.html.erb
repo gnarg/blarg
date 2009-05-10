@@ -1,0 +1,13 @@
+<dt>Tags</dt>
+<dd>
+  <ul class="counts">
+    <% @all_tags.each do |tag| %>
+    <li>
+      <% if controller_name == 'posts' && params[:action] == 'index' && request.path != '/' %>
+        <% link_to '+', "#{request.uri}/#{tag}" %>
+      <% end %>
+      <%= link_to tag, "/tags/#{tag}" %>
+    </li>
+    <% end %>
+  </ul>
+</dd>
