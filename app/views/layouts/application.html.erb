@@ -11,7 +11,6 @@
   
   <%= yield :css %>
 
-  <%= partial 'layout/google-analytics' if RAILS_ENV == 'production' %>
 </head>
 <body>
   <%= link_to image_tag('redgear.png', { :style => 'float:left' }), '/' %>
@@ -133,5 +132,6 @@
 	  </div>
   </div>
 
+  <%= partial 'layout/google-analytics' if RAILS_ENV == 'production' %>
 </body>
 </html>
