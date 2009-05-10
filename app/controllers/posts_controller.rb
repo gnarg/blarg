@@ -1,8 +1,6 @@
 class PostsController < ApplicationController
   before_filter :marshal_params
   before_filter :get_post_by_slug, :only => [:show, :edit, :update]
-  before_filter :get_recent_posts
-  before_filter :get_all_tags
   # before :basic_authentication, :only => [ :new, :create, :edit, :update ]
 
   def index
@@ -65,14 +63,6 @@ protected
   
   def get_post_by_slug
     @post = Post.get_by_slug(params[:id])
-  end
-  
-  def get_recent_posts
-    @recent_posts = Post.all
-  end
-  
-  def get_all_tags
-    @all_tags = Post.get_all_tags
   end
 
   def marshal_params

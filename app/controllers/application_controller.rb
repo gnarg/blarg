@@ -7,4 +7,17 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
+
+  before_filter :get_recent_posts
+  before_filter :get_all_tags
+
+protected
+
+  def get_recent_posts
+    @recent_posts = Post.all
+  end
+
+  def get_all_tags
+    @all_tags = Post.get_all_tags
+  end
 end
