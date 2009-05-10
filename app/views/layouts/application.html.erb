@@ -44,9 +44,9 @@
 		</div>
 
 		<div class="primary">
-		  <!-- THIS IS WHERE THE MAGIC GOES -->
-      <%= yield %>
-      <!-- THE MAGIC IS OVER -->
+		  <!-- YIELD TO MAIN CONTENT -->
+      <%= yield :layout %>
+      <!-- BACK FROM THE MAIN CONTENT YIELD -->
 		</div><!-- .primary -->
 		<hr class="hide" />
 
