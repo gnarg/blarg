@@ -132,6 +132,6 @@
 	  </div>
   </div>
 
-  <%= partial 'layout/google-analytics' if RAILS_ENV == 'production' %>
+  <%= render('layouts/google_analytics') if RAILS_ENV == 'production' %>
 </body>
 </html>
