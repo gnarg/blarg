@@ -10,6 +10,8 @@ class PostCommentTest < ActionController::IntegrationTest
     fill_in "comment_author", :with => "testy"
     fill_in "comment_url", :with => "slackworks.com"
     fill_in "comment_body", :with => "comment"
-    click_button "Post comment"    
+    click_button "Post comment"
+
+    assert_response :success
   end
 end
