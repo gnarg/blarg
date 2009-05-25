@@ -7,8 +7,8 @@ class PostTest < ActiveSupport::TestCase
   
   test "#comments returns the associated comments" do
     post = Post.create(:title => 'new post')
-    comment1 = Comment.create(:post_id => post.id)
-    comment2 = Comment.create(:post_id => post.id)
+    comment1 = Comment.create(:post_id => post.id, :body => 'comment')
+    comment2 = Comment.create(:post_id => post.id, :body => 'comment')
     
     post_comments = post.comments
     

@@ -16,14 +16,13 @@ class CommentsController < ApplicationController
     if @comment.body.instance_of? Array
       @comment.body = @comment.body.join( ' ' )      
     end
-    respond_to do |format|      
 
-      format.js  do
-        if @comment.save
-          render :partial => 'comments/comment', :locals => { :comment => @comment}, :layout => false
-        end  
-      end
+    if @comment.save
+      render :partial => 'comments/comment', :locals => { :comment => @comment}, :layout => false
+    else
+      render :json => @comment.errors.to_hash.to_json, :status => 403
     end
+    
   end
 
   def update
