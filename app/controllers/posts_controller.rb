@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # before :basic_authentication, :only => [ :new, :create, :edit, :update ]
 
   def index
-    @posts = Post.get_by_tags(*@tags)
+    @posts = Post.get_by_tags(*@tags).reverse
     
     # raise NotFound if @posts.empty?
 

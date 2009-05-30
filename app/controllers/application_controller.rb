@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 protected
 
   def get_recent_posts
-    @recent_posts = Post.all
+    @recent_posts = Post.all.reverse
   end
 
   def get_all_tags
