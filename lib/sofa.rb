@@ -15,7 +15,7 @@ module Sofa
         nil
       end
 
-      def create(attributes)
+      def create(attributes={})
         object = self.new(attributes)
         object.save
         object
