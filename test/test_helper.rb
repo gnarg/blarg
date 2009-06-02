@@ -46,4 +46,9 @@ class ActiveSupport::TestCase
       COUCHDB.delete_doc('_id' => row['id'], '_rev' => row['value']['rev'])
     end
   end
+
+  def create_post( params = {} )
+    params = { :title => 'title', :slug => 'slug', :author => 'author', :body => 'body' }.merge( params )
+    Post.create( params )
+  end
 end

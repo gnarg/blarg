@@ -50,7 +50,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post.replace(params[:post])
+    @post.merge(params[:post])
     if @post.save
       redirect_to post_path(@post.slug)
     else

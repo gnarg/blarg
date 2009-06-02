@@ -6,7 +6,7 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   test "#create saves the given comment for a post" do
-    test_post = Post.create(:slug => 'test-post' )
+    test_post = create_post(:slug => 'test-post' )
 
     post :create, :post_id => test_post.id, :comment => {:author => 'author', :body => 'comment', :url => 'url'}
 
@@ -19,7 +19,7 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
    test "#create returns a 403 status on validation errors" do
-    test_post = Post.create(:slug => 'test-post-with-validation-errors' )
+    test_post = create_post(:slug => 'test-post-with-validation-errors' )
 
     post :create, :post_id => test_post.id, :comment => {:author => 'author', :url => 'url'}
 

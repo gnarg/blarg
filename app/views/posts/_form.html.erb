@@ -10,15 +10,16 @@
   </tr>
   <tr>
     <td>Tags: </td>
+    <% logger.info @post.inspect %>
     <td><%= text_field_tag 'post[tags]', @post.tags && @post.tags.join(' '), :size => 50 %></td>
   </tr>
   <tr>
     <td>Summary: </td>
-    <td><%= text_area_tag 'post[summary]', @post.summary, :rows => 10, :cols => 50 %></td>
+    <td><%= text_area_tag 'post[summary]', @post.summary, :rows => 10, :cols => 50, :id => 'post_summary' %></td>
   </tr>
   <tr>
     <td>Body: </td>
-    <td><%= text_area_tag 'post[body]', @post.body, :rows => 30, :cols => 50 %></td>
+    <td><%= text_area_tag 'post[body]', @post.body, :rows => 30, :cols => 50, :id => 'post_body' %></td>
   </tr>
   <tr>
     <td>Created at: </td><td><%#= text_field_tag 'post[created_at]', @post.created_at, :size => 50 %></td>

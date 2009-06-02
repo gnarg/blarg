@@ -1,4 +1,5 @@
 <%# form_for @post, :action => "/posts" do %>
+<%= error_messages_for :post%>
 <% form_tag "/posts", :method => 'post' do %>
   <%= render :partial => 'form' %>
 <% end %>

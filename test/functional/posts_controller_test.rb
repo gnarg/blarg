@@ -6,7 +6,7 @@ class PostsControllerTest < ActionController::TestCase
   end
 
   test "gets recent posts" do
-    post = Post.create(:slug => 'post1')
+    post = create_post(:slug => 'post1')
 
     get :index
 
@@ -14,8 +14,8 @@ class PostsControllerTest < ActionController::TestCase
   end
 
   test "gets a list of all tags" do
-    post_foo = Post.create(:tags => ['foo'])
-    post_bar = Post.create(:tags => ['bar'])
+    post_foo = create_post(:tags => ['foo'])
+    post_bar = create_post(:tags => ['bar'])
 
     get :index
 
@@ -24,8 +24,8 @@ class PostsControllerTest < ActionController::TestCase
   end
 
   test "#index with no tags shows all posts" do
-    post1 = Post.create(:slug => 'post1')
-    post2 = Post.create(:slug => 'post2')
+    post1 = create_post(:slug => 'post1')
+    post2 = create_post(:slug => 'post2')
 
     get :index
 
@@ -34,9 +34,9 @@ class PostsControllerTest < ActionController::TestCase
   end
 
   test "#index with tags shows all posts with all given tags" do
-    post_foo = Post.create(:tags => ['foo'])
-    post_bar = Post.create(:tags => ['bar'])
-    post_foo_bar = Post.create(:tags => ['foo', 'bar'])
+    post_foo = create_post(:tags => ['foo'])
+    post_bar = create_post(:tags => ['bar'])
+    post_foo_bar = create_post(:tags => ['foo', 'bar'])
 
     get :index, :tags => ['foo', 'bar']
 
@@ -48,19 +48,19 @@ class PostsControllerTest < ActionController::TestCase
   # test "#index shows posts ordered by create_date"
 
   test "#show gets the post by slug" do
-    post = Post.create(:slug => 'test-post')
+    post = create_post(:slug => 'test-post')
     get :show, :id => 'test-post'
     assert_equal post.id, assigns(:post).id
   end
 
   test "#edit gets the post by slug" do
-    post = Post.create(:slug => 'test-post')
+    post = create_post(:slug => 'test-post')
     get :edit, :id => 'test-post'
     assert_equal post.id, assigns(:post).id
   end
 
   test "#update updates the specified post on success" do
-    post = Post.create(:slug => 'test-post', :title => 'old-title')
+    post = create_post(:slug => 'test-post', :title => 'old-title')
     put :update, :id => 'test-post', :post => {:slug => 'test-post', :title => 'new-title' }
     assert_equal 'new-title', assigns(:post).title
     assert_redirected_to :action => 'show', :id => 'test-post'
@@ -72,7 +72,9 @@ class PostsControllerTest < ActionController::TestCase
   end
 
   test "#create saves the given post data as a new post" do
-    post :create, :post => {:slug => 'test-post', :title => 'test post'}
+    assert_difference 'Post.count' do
+      post :create, :post => {:slug => 'test-post', :title => 'test post', :author => 'author', :body => 'body' }
+    end
     assert_redirected_to :action => 'show', :id => 'test-post'
     assert_equal 'test post', assigns(:post).title
   end

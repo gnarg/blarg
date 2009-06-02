@@ -6,7 +6,7 @@ class PostTest < ActiveSupport::TestCase
   end
   
   test "#comments returns the associated comments" do
-    post = Post.create(:title => 'new post')
+    post = create_post(:title => 'new post')
     comment1 = Comment.create(:post_id => post.id, :body => 'comment')
     comment2 = Comment.create(:post_id => post.id, :body => 'comment')
     
@@ -17,16 +17,16 @@ class PostTest < ActiveSupport::TestCase
   end
   
   test ".get_by_slug returns the post with given slug" do
-    saved_post = Post.create(:slug => 'test-slug')
+    saved_post = create_post(:slug => 'test-slug')
     found_post = Post.get_by_slug('test-slug')
     
     assert_equal saved_post, found_post
   end
   
   test ".get_by_tags returns all posts with all given tags" do
-    post_foo = Post.create(:tags => ['foo'])
-    post_bar = Post.create(:tags => ['bar'])
-    post_foo_bar = Post.create(:tags => ['foo', 'bar'])
+    post_foo = create_post(:tags => ['foo'])
+    post_bar = create_post(:tags => ['bar'])
+    post_foo_bar = create_post(:tags => ['foo', 'bar'])
     
     posts = Post.get_by_tags('foo', 'bar')
     
@@ -36,9 +36,9 @@ class PostTest < ActiveSupport::TestCase
   end
   
   test ".get_by_tags returns all posts if no tags are given" do
-    post_foo = Post.create(:tags => ['foo'])
-    post_bar = Post.create(:tags => ['bar'])
-    post_foo_bar = Post.create(:tags => ['foo', 'bar'])
+    post_foo = create_post(:tags => ['foo'])
+    post_bar = create_post(:tags => ['bar'])
+    post_foo_bar = create_post(:tags => ['foo', 'bar'])
     
     posts = Post.get_by_tags
     
@@ -48,10 +48,10 @@ class PostTest < ActiveSupport::TestCase
   end
   
   test ".get_all_tags returns unique list of all tags" do
-    post_foo = Post.create(:tags => ['foo'])
-    post_bar = Post.create(:tags => ['bar'])
-    post_foo_bar = Post.create(:tags => ['foo', 'bar'])
-    post_foo_baz = Post.create(:tags => ['foo', 'baz'])
+    post_foo = create_post(:tags => ['foo'])
+    post_bar = create_post(:tags => ['bar'])
+    post_foo_bar = create_post(:tags => ['foo', 'bar'])
+    post_foo_baz = create_post(:tags => ['foo', 'baz'])
     
     tags = Post.get_all_tags
     

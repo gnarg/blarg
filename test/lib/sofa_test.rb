@@ -32,6 +32,21 @@ class SofaTest < ActiveSupport::TestCase
         assert @results.include?(@b)
       end
     end
+
+    context ".count" do
+      setup do
+        clean_couch
+
+        @a = SofaFoo.new('name' => 'A'); @a.save
+        @b = SofaFoo.new('name' => 'B'); @b.save
+
+        @result = SofaFoo.count
+      end
+
+      should "return integer 2" do
+        assert_equal 2, @result
+      end
+    end
     
     context ".get" do
       setup do
@@ -120,6 +135,7 @@ class SofaTest < ActiveSupport::TestCase
       
       should "have only the new attributes" do
         assert !@obj.to_hash.keys.include?('a')
+        assert_equal() {:b => 'third', :c => 'fourth'}, @obj.to_hash )
       end
     end
     

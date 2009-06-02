@@ -1,4 +1,26 @@
 class Post < Sofa::Record
+  validates_present :slug
+  validates_present :title
+  validates_present :author
+  validates_present :body
+
+  before :validations, :convert_tags_to_array
+
+  def convert_tags_to_array
+    tags = @table['tags']
+    if tags && tags.is_a?( String )
+      if tags.size > 0
+        @table['tags'] = tags.split( ' ' )
+      else
+        @table['tags'] = nil
+      end
+    else
+      @table['tags'] = tags
+    end
+
+    true
+  end
+
   def comments
     Comment.temp_view <<-JS
       if (doc.document_type == 'Comment' && doc.post_id == '#{self.id}') {
