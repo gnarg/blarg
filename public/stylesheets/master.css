@@ -459,6 +459,8 @@ ul.dates .date{
         color:#7A7A7A;
         color: #4a4a4a;
         padding:0 1.5em 0 0;
+        font-family: Monaco, "Courier New", monospace;
+        font-size: 80%;
 }
 
 ul.counts .count{
