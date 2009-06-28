@@ -448,7 +448,7 @@ ul.dates, ul.counts{
         /*border-top:1px solid #C2C2C2;*/
         /*border-top:1px solid #1c1c1c;*/
 }
-ul.dates li, ul.counts li{
+ul.dates li, ul.counts li, ul.authors li {
         list-style-type:none;
         margin:0;
         /*padding:0.5em 0;*/
