@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.connect 'feed.xml', :controller => 'posts', :action => 'index', :format => 'xml'
+  map.connect 'posts/feed.xml', :controller => 'posts', :action => 'index', :format => 'xml'
 
   map.resources :posts do |posts|
     posts.resources :comments
