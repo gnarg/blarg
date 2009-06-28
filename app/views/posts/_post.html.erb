@@ -1,5 +1,5 @@
 <div class="story">
-	<h3><%= link_to post.title, "/posts/#{post.document_id}" %></h3>
+	<h3><%= link_to post.title, "/posts/#{post.slug}" %></h3>
 
   <div class="summary">
 	  <%= RedCloth.new(post.summary || '').to_html %>

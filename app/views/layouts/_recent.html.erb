@@ -2,7 +2,7 @@
 <dd>
   <ul class="dates">
     <% @recent_posts.each do |post| %>
-    <li><a href="/posts/<%= post.document_id %>">
+    <li><a href="/posts/<%= post.slug %>">
       <span class="date"><%= post.created_at.strftime('%b %d %Y') %></span>
       <%= post.title %>
     </a></li>

@@ -11,8 +11,8 @@
   <% @posts.each do |post| %>
     <entry>
       <title><%= post.title %></title>
-      <link rel="alternate" href="<%= @base_host %>/posts/<%= post.document_id %>" />
-      <id><%= @base_host %>/posts/<%= post.document_id %></id>
+      <link rel="alternate" href="<%= @base_host %>/posts/<%= post.slug %>" />
+      <id><%= @base_host %>/posts/<%= post.slug  %></id>
       <updated><%= post.updated_at.xmlschema %></updated>
       <author><name><%= post.author %></name></author>
       <summary><%= remove_markup(RedCloth.new(post.summary).to_html) %></summary>
