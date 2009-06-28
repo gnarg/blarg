@@ -9,4 +9,4 @@
   </script>  
 <% end %>
 
-<%= render(:partial => "post", :collection => @posts, :locals => {:slim => true}) %>
+<%= render(:partial => "post", :collection => @posts[0..4], :locals => {:slim => true}) %>
