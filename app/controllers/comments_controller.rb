@@ -17,12 +17,15 @@ class CommentsController < ApplicationController
       @comment.body = @comment.body.join( ' ' )      
     end
 
-    if @comment.save
-      render :partial => 'comments/comment', :locals => { :comment => @comment}, :layout => false
+    if request.xhr?
+      if @comment.save
+        render :partial => 'comments/comment', :locals => { :comment => @comment}, :layout => false
+      else
+        render :json => @comment.errors.to_hash.to_json, :status => 403
+      end
     else
-      render :json => @comment.errors.to_hash.to_json, :status => 403
+      render :text => 'Javascript required to post comments', :status => 403
     end
-    
   end
 
   def update
